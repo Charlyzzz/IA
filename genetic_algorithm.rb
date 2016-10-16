@@ -35,10 +35,16 @@ module IA
     end
 
     restriction do
-      passengers.map(&:name).same_elements?(NAMES * 2)
+      !passengers.map(&:name).same_elements?(NAMES * 2)
     end
 
+    restriction do
+      passengers
+          .map { |passanger| passanger.chromosomes }
+          .flatten.any?(&:nil?)
+    end
   end
 end
 
-puts Array.new(1000000) { IA::Train.new }.map(&:fitness).uniq!.sort
+puts Array.new(20000) { IA::Train.new }.map(&:fitness).uniq!.sort
+#puts IA::Passenger.new.chromosome_string.inspect
