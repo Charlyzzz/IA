@@ -5,8 +5,8 @@ module IA
     class << self
       attr_reader :statements
 
-      def new(*_)
-        super(statements)
+      def new(*args)
+        super(statements, *args)
       end
 
       def restriction(&restriction)
@@ -26,32 +26,47 @@ module IA
       end
     end
 
+    def initialize(statements, sequence = nil)
+      @statements = statements
+      update!(sequence || RANDOM_SEQUENCE * 6)
+    end
+
+    def chromosome_string
+      passengers
+          .map { |passenger| passenger.chromosome_string }
+          .reduce(:+)
+    end
+
+    def update!(chromosome)
+      @passengers = chromosome
+                        .scan(/.{6}/)
+                        .map { |sequence| Passenger.new(sequence) }
+    end
+
     def fitness
       @statements
           .select { |condition, _| instance_eval(&condition) }
-          .inject(0) { |fitness, hash| hash[1] + fitness }
-    end
-
-    def initialize(statements)
-      @statements = statements
-      @passengers = Array.new(6) { Passenger.new }
+          .inject(100) { |fitness, hash| hash[1] + fitness }
     end
 
     def driver
-      @passengers.first
+      passengers.first
     end
 
     def waiter
-      @passengers[1]
+      passengers[1]
     end
 
     def inspector
-      @passengers.first
+      passengers[2]
+    end
+
+    def employees
+      passengers.take(3)
     end
 
     def travelers
-      @passengers.last(3)
+      passengers.last(3)
     end
-
   end
 end
