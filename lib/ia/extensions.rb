@@ -9,3 +9,9 @@ module ArrayExtension
 end
 
 Array.prepend ArrayExtension
+
+class Fixnum
+  def to_binary
+    to_s(2).rjust(2, '0')
+  end
+end

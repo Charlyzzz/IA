@@ -3,37 +3,37 @@ module IA
     attr_reader :passengers
 
     class << self
-      attr_reader :conditions
+      attr_reader :statements
 
       def new(*_)
-        super(conditions, restrictions)
+        super(statements)
       end
 
       def restriction(&restriction)
-        restrictions << restriction
+        add_statement(restriction => -30)
       end
 
       def condition(&condition)
-        conditions << condition
+        add_statement(condition => 10)
       end
 
-      def conditions
-        @conditions ||= []
+      def statements
+        @statements ||= {}
       end
 
-      def restrictions
-        @restrictions ||= []
+      def add_statement(statement)
+        statements.merge!(statement)
       end
     end
 
     def fitness
-      @conditions.count { |condition| instance_eval(&condition) } * 10 -
-          @restrictions.count { |condition| instance_eval(&condition) } * 30
+      @statements
+          .select { |condition, _| instance_eval(&condition) }
+          .inject(0) { |fitness, hash| hash[1] + fitness }
     end
 
-    def initialize(conditions, restrictions)
-      @conditions = conditions
-      @restrictions = restrictions
+    def initialize(statements)
+      @statements = statements
       @passengers = Array.new(6) { Passenger.new }
     end
 

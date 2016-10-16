@@ -1,6 +1,8 @@
 require_relative '../lib/ia/extensions'
 require_relative '../lib/ia/passenger'
 require_relative '../lib/ia/train'
+require_relative '../lib/ia/selection'
+require_relative '../lib/ia/crossover'
 
 module IA
   NAMES = [:alberto, :bernardo, :carlos].freeze
