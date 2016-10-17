@@ -32,4 +32,5 @@ results
 content = results.map { |hash| [hash[:winner], hash[:iteration], hash[:last_population]] }.inspect
 File.write('results.txt', content)
 Dir.entries('.').grep(/.+\.txt/).each { |file| puts "#{file} was created." }
-puts 'End of simulation.'
+puts 'End of simulation. Press any key to close.'
+gets
