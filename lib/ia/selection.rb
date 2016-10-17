@@ -1,1 +1,2 @@
-require_relative '../../lib/ia/selection/roulette'
+require_relative './selection/roulette'
+require_relative './selection/ranking'

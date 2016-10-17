@@ -1,7 +1,7 @@
 module IA
   module Crossover
 
-    SIMPLE_CROSSOVER_POSITION = 18
+    ENV[:SIMPLE_CROSSOVER_POSITION] = 5
 
     module SimpleCrossover
       class << self
@@ -18,7 +18,7 @@ module IA
         end
 
         def at
-          SIMPLE_CROSSOVER_POSITION
+          ENV[:SIMPLE_CROSSOVER_POSITION]
         end
       end
     end

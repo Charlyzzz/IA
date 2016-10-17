@@ -1,12 +1,12 @@
 module IA
   module Mutation
 
-    SIMPLE_MUTATION_RATE = 0.1
+    ENV[:SIMPLE_MUTATION_RATE] = 0.1
 
     module SimpleMutation
       class << self
         def mutate(train)
-          SIMPLE_MUTATION_RATE > rand ? do_mutate(train) : train
+          ENV[:SIMPLE_MUTATION_RATE] > rand ? do_mutate(train) : train
         end
 
         private

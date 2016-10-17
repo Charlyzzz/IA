@@ -49,6 +49,10 @@ module IA
           .reduce(:+)
     end
 
+    def inspect
+      chromosomes.inspect
+    end
+
     private
 
     def build_from(chromosomes)

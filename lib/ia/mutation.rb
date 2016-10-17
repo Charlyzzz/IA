@@ -1,1 +1,1 @@
-require_relative '../../lib/ia/mutation/simple_mutation'
+require_relative './mutation/simple_mutation'

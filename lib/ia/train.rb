@@ -1,4 +1,8 @@
 module IA
+
+  # A chromosome of 36 1's means all passengers are randomly generated
+  ENV[:INITIAL_TRAIN_CHROMOSOME] = '1' * 36
+
   class Train
     attr_reader :passengers
 
@@ -61,6 +65,10 @@ module IA
 
     def travelers
       passengers.last(3)
+    end
+
+    def inspect
+      passengers.inspect
     end
 
     private

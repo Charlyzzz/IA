@@ -1,2 +1,1 @@
-require_relative '../../lib/ia/crossover/simple_crossover
-'
+require_relative './crossover/simple_crossover'

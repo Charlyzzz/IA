@@ -1,0 +1,3 @@
+module IA
+  ENV = {}
+end
