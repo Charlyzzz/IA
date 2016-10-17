@@ -28,19 +28,13 @@ module IA
 
     def initialize(statements, sequence = nil)
       @statements = statements
-      update!(sequence || RANDOM_SEQUENCE * 6)
+      build_from(sequence || RANDOM_SEQUENCE * 6)
     end
 
     def chromosome_string
       passengers
           .map { |passenger| passenger.chromosome_string }
           .reduce(:+)
-    end
-
-    def update!(chromosome)
-      @passengers = chromosome
-                        .scan(/.{6}/)
-                        .map { |sequence| Passenger.new(sequence) }
     end
 
     def fitness
@@ -67,6 +61,14 @@ module IA
 
     def travelers
       passengers.last(3)
+    end
+
+    private
+
+    def build_from(chromosome)
+      @passengers = chromosome
+                        .scan(/.{6}/)
+                        .map { |sequence| Passenger.new(sequence) }
     end
   end
 end

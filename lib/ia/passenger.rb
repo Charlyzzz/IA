@@ -9,7 +9,6 @@ module IA
   class Passenger
     attr_reader :chromosomes
 
-
     def initialize(chromosomes = nil)
       build_from(chromosomes || RANDOM_SEQUENCE)
     end

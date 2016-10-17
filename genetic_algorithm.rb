@@ -1,4 +1,5 @@
 require_relative 'lib/ia'
+require 'parallel'
 
 module IA
   class Train
@@ -44,3 +45,15 @@ module IA
     end
   end
 end
+
+# Uso
+# La solución óptima tiene 160 de fitness (arranca en 100 y cada una de las seis condiciones suma 10)
+# Parallel.map(Array.new(5), in_threads: 5) { |_| IA::GeneticAlgorithm.new.reach_fitness(160) }
+#
+# El resultado es un hash como el siguiente
+# {
+#     subject: el ganador,
+#     iteration: numero de iteración en la que lo consiguió,
+#     populations: lista de todas las poblaciones por las que transitó
+# }
+

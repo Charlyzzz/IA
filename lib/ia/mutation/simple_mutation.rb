@@ -1,12 +1,12 @@
 module IA
   module Mutation
 
-    MUTATION_RATE = 1
+    SIMPLE_MUTATION_RATE = 0.1
 
     module SimpleMutation
       class << self
         def mutate(train)
-          MUTATION_RATE > rand ? do_mutate(train) : train
+          SIMPLE_MUTATION_RATE > rand ? do_mutate(train) : train
         end
 
         private
@@ -15,7 +15,7 @@ module IA
           chromosome = train.chromosome_string
           position = rand(chromosome.size)
           chromosome[position] = negate(chromosome[position])
-          train.update!(chromosome)
+          Train.new(chromosome)
         end
 
         def negate(bit)
